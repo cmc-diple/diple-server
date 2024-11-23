@@ -4,6 +4,7 @@ import com.example.deple.converter.ChallengeConverter;
 import com.example.deple.dto.challenge.ChallengeRequestDTO;
 import com.example.deple.dto.challenge.ChallengeResponseDTO;
 import com.example.deple.entity.Challenge;
+import com.example.deple.entity.enums.Status;
 import com.example.deple.repository.ChallengeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -70,6 +71,21 @@ public class ChallengeService {
         Challenge updatedChallenge = challengeRepository.save(existingChallenge);
 
         return challengeConverter.toChallengeResponseDTO(updatedChallenge);
+    }
+
+    @Transactional(readOnly = true)
+    public ChallengeResponseDTO.ChallengeSummaryDTO getAllCompletedChallenges() {
+        List<Challenge> successChallenges = challengeRepository.findByStatus(Status.SUCCESS);
+
+        List<ChallengeResponseDTO> challengeDTOs = successChallenges.stream()
+                .map(ChallengeResponseDTO::new)
+                .toList();
+
+        // 전체 갯수와 변환된 Challenge 리스트를 포함하는 DTO 반환
+        return ChallengeResponseDTO.ChallengeSummaryDTO.builder()
+                .totalCount(challengeDTOs.size()) // 전체 갯수
+                .challenges(challengeDTOs) // 변환된 리스트
+                .build();
     }
 }
 
