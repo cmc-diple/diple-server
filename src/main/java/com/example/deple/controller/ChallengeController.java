@@ -31,4 +31,29 @@ public class ChallengeController {
         ChallengeResponseDTO challengeResponseDTO = challengeService.getChallenge(challengeDay);
         return ApiResponse.successResponse(challengeResponseDTO);
     }
+
+
+    @Operation(summary = "챌린지 전체 목록 보여주기 API")
+    @GetMapping({"/challenges/challengeAll"})
+    public ApiResponse<ChallengeResponseDTO.AllChallengeListDto> getRecipeList(){
+        return ApiResponse.successResponse(challengeService.getAllChallenges());
+    }
+
+    @Operation(summary = "챌린지 수정 API")
+    @PutMapping("/challenges/{challengeDay}")
+    public ApiResponse<ChallengeResponseDTO> modifyChallenge(
+            @RequestBody ChallengeRequestDTO.ChallengeCreateDto request,
+            @PathVariable("challengeDay") Integer challengeDay) {
+        ChallengeResponseDTO challengeResponseDTO = challengeService.modifyChallenge(challengeDay, request);
+        return ApiResponse.successResponse(challengeResponseDTO);
+    }
+
+    @Operation(summary = "챌린지 완료 체크하기 API")
+    @PutMapping("/challenges/complete/{challengeDay}")
+    public ApiResponse<ChallengeResponseDTO> modifyChallenge(
+            @PathVariable("challengeDay") Integer challengeDay) {
+        ChallengeResponseDTO challengeResponseDTO = challengeService.completeChallenge(challengeDay);
+        return ApiResponse.successResponse(challengeResponseDTO);
+    }
+
 }
