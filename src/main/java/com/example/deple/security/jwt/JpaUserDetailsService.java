@@ -26,7 +26,8 @@ public class JpaUserDetailsService implements UserDetailsService {
     }
 
     private UserDetails createUserDetails(Member member) {
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(member.getPart().toString());
+//        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(member.getPart().toString());
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_USER");
 
         return new User(
                 String.valueOf(member.getUsername()),
