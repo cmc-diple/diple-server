@@ -1,5 +1,6 @@
 package com.example.deple.entity;
 
+import com.example.deple.dto.challenge.ChallengeRequestDTO;
 import com.example.deple.entity.base.BaseTimeEntity;
 import com.example.deple.entity.enums.Status;
 import jakarta.persistence.*;
@@ -42,5 +43,12 @@ public class Challenge extends BaseTimeEntity {
         this.details = details;
         this.status = status;
         this.memberChallenge = memberChallenge;
+    }
+
+    public Challenge modifyChallenge(ChallengeRequestDTO.ChallengeCreateDto challengeRequestDto) {
+        if (challengeRequestDto.getTitle() != null) this.title = challengeRequestDto.getTitle();
+        if (challengeRequestDto.getDescription() != null) this.details = challengeRequestDto.getDescription();
+
+        return this;
     }
 }

@@ -39,4 +39,13 @@ public class ChallengeController {
         return ApiResponse.successResponse(challengeService.getAllChallenges());
     }
 
+    @Operation(summary = "챌린지 수정 API")
+    @PutMapping("/challenges/{challengeDay}")
+    public ApiResponse<ChallengeResponseDTO> modifyChallenge(
+            @RequestBody ChallengeRequestDTO.ChallengeCreateDto request,
+            @PathVariable("challengeDay") Integer challengeDay) {
+        ChallengeResponseDTO challengeResponseDTO = challengeService.modifyChallenge(challengeDay, request);
+        return ApiResponse.successResponse(challengeResponseDTO);
+    }
+
 }

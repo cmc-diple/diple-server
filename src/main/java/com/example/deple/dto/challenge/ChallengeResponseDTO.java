@@ -31,5 +31,6 @@ public class ChallengeResponseDTO {
     public static class AllChallengeListDto {
         List<Challenge> challengeList;
     }
+
 }
 
