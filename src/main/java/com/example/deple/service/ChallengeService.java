@@ -27,5 +27,13 @@ public class ChallengeService {
         Challenge savedChallenge = challengeRepository.save(challenge);
         return challengeConverter.toChallengeResponseDTO(savedChallenge);
     }
+
+    @Transactional(readOnly = true)
+    public ChallengeResponseDTO getChallenge(Integer challengeDay) {
+        Challenge challenge = challengeRepository.findByNumber(challengeDay)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Day에 해당하는 챌린지를 찾을 수 없습니다."));
+
+        return challengeConverter.toChallengeResponseDTO(challenge);
+    }
 }
 

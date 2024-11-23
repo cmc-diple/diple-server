@@ -16,6 +16,7 @@ public class ChallengeConverter {
                 .details(dto.getDescription())
                 .build();
     }
+
     public ChallengeResponseDTO toChallengeResponseDTO(Challenge challengeEntity) {
         return ChallengeResponseDTO.builder().entity(challengeEntity).build();
     }

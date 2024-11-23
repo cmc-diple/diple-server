@@ -1,5 +1,6 @@
 package com.example.deple.dto.challenge;
 
+import com.example.deple.entity.enums.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
