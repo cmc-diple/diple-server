@@ -46,5 +46,5 @@ jobs:
             sudo chmod 666 /var/run/docker.sock
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull soul4927/diple-server
-            docker-compose -f docker-compose.yml --env-file ./.env.prod up -d
-            docker image prune -f
+            sudo docker compose -f docker-compose.yml --env-file ./.env.prod up -d
+            sudo docker image prune -f
