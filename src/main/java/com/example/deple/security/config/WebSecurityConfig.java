@@ -45,12 +45,14 @@ public class WebSecurityConfig {
                         .accessDeniedHandler(jwtAccessDeniedHandler)
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/project/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/partleader/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
-                        .anyRequest().authenticated()
+//                        .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/project/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/partleader/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
+//                        .anyRequest().authenticated()
+                        // 임시로 모든 요청 허용
+                        .anyRequest().permitAll()
                 );
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

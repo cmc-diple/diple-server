@@ -132,3 +132,6 @@ springdoc:
     - /**
   cache:
     disabled: true
+
+chatgpt:
+  api-key: ${OPENAI_API_KEY}

@@ -21,7 +21,7 @@ public class SwaggerConfig {
 		Info info = new Info()
 				.title("API Document")
 				.version("v0.0.1")
-				.description("REDDI API 명세서");
+				.description("API 명세서");
 		return new OpenAPI()
 				.components(new Components()
 						.addSecuritySchemes(SECURITY_SCHEME_NAME, new SecurityScheme()
