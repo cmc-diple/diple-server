@@ -58,5 +58,18 @@ public class ChallengeService {
         // 4. DTO로 변환 후 반환
         return challengeConverter.toChallengeResponseDTO(updatedChallenge);
     }
+
+    @Transactional
+    public ChallengeResponseDTO completeChallenge(Integer challengeDay) {
+
+        Challenge existingChallenge = challengeRepository.findByNumber(challengeDay)
+                .orElseThrow(() -> new IllegalArgumentException("해당 날짜의 챌린지가 존재하지 않습니다."));
+
+        existingChallenge.completeChallenge();
+
+        Challenge updatedChallenge = challengeRepository.save(existingChallenge);
+
+        return challengeConverter.toChallengeResponseDTO(updatedChallenge);
+    }
 }
 

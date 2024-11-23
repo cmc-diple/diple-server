@@ -51,4 +51,9 @@ public class Challenge extends BaseTimeEntity {
 
         return this;
     }
+
+    public Challenge completeChallenge() {
+        this.status=Status.SUCCESS;
+        return this;
+    }
 }

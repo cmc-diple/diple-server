@@ -48,4 +48,12 @@ public class ChallengeController {
         return ApiResponse.successResponse(challengeResponseDTO);
     }
 
+    @Operation(summary = "챌린지 완료 체크하기 API")
+    @PutMapping("/challenges/complete/{challengeDay}")
+    public ApiResponse<ChallengeResponseDTO> modifyChallenge(
+            @PathVariable("challengeDay") Integer challengeDay) {
+        ChallengeResponseDTO challengeResponseDTO = challengeService.completeChallenge(challengeDay);
+        return ApiResponse.successResponse(challengeResponseDTO);
+    }
+
 }
