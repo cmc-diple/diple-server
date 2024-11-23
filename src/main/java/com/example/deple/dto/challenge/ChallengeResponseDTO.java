@@ -17,7 +17,6 @@ public class ChallengeResponseDTO {
     private String Description;
     private Status Status;
 
-
     @Builder
     public ChallengeResponseDTO(Challenge entity) {
         this.Number = entity.getNumber();
@@ -27,9 +26,20 @@ public class ChallengeResponseDTO {
     }
 
     @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Builder
     public static class AllChallengeListDto {
         List<Challenge> challengeList;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class ChallengeSummaryDTO {
+        private int totalCount; // 전체 갯수
+        private List<ChallengeResponseDTO> challenges; // 여러 Challenge DTO
     }
 
 }
