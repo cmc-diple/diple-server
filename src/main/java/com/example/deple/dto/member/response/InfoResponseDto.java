@@ -14,8 +14,6 @@ public class InfoResponseDto {
 	private String teamName;
 	private String part;
 	private Boolean isVerified;
-	private Boolean isProjectVoted;
-	private Boolean isPartLeaderVoted;
 
 	public static InfoResponseDto from(Member member) {
 		return InfoResponseDto.builder()
@@ -23,11 +21,7 @@ public class InfoResponseDto {
 				.username(member.getUsername())
 				.name(member.getName())
 				.email(member.getEmail())
-				.teamName(member.getTeamName().toString())
-				.part(member.getPart().toString())
 				.isVerified(member.getIsVerified())
-				.isProjectVoted(member.getIsProjectVoted())
-				.isPartLeaderVoted(member.getIsPartLeaderVoted())
 				.build();
 	}
 }

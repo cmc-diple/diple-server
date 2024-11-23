@@ -1,17 +1,17 @@
 package com.example.deple.entity;
 
 import com.example.deple.entity.base.BaseTimeEntity;
+import com.example.deple.entity.enums.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "member_part_leaders")
-public class MemberPartLeader extends BaseTimeEntity {
+@Table(name = "member_challenge")
+public class MemberChallenge extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,13 +21,17 @@ public class MemberPartLeader extends BaseTimeEntity {
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "part_leader_id")
-    private PartLeader partLeader;
+    @JoinColumn(name = "challenge_id")
+    private Challenge challenge;
 
-    @Builder
-    public MemberPartLeader(Long id, Member member, PartLeader partLeader) {
-        this.id = id;
-        this.member = member;
-        this.partLeader = partLeader;
-    }
+    @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = true)
+    private String details;
+
+    @Column(nullable = false)
+    private Status status;
+
+
 }
