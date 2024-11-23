@@ -3,6 +3,7 @@ package com.example.deple.converter;
 import com.example.deple.dto.challenge.ChallengeRequestDTO;
 import com.example.deple.dto.challenge.ChallengeResponseDTO;
 import com.example.deple.entity.Challenge;
+import com.example.deple.entity.enums.Status;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class ChallengeConverter {
                 .number(challengeDay)
                 .title(dto.getTitle())
                 .details(dto.getDescription())
+                .status(Status.CHALLENGING)
                 .build();
     }
 
