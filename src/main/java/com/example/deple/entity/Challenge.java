@@ -1,6 +1,7 @@
 package com.example.deple.entity;
 
 import com.example.deple.entity.base.BaseTimeEntity;
+import com.example.deple.entity.enums.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
