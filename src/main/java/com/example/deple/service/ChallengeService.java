@@ -43,5 +43,20 @@ public class ChallengeService {
 
         return ChallengeResponseDTO.AllChallengeListDto.builder().challengeList(challenges).build();
     }
+
+    @Transactional
+    public ChallengeResponseDTO modifyChallenge(Integer challengeDay, ChallengeRequestDTO.ChallengeCreateDto challengeRequestDTO) {
+        // 1. 기존 엔티티 조회
+        Challenge existingChallenge = challengeRepository.findByNumber(challengeDay)
+                .orElseThrow(() -> new IllegalArgumentException("해당 날짜의 챌린지가 존재하지 않습니다."));
+
+        existingChallenge.modifyChallenge(challengeRequestDTO);
+
+        // 3. 변경된 엔티티 저장
+        Challenge updatedChallenge = challengeRepository.save(existingChallenge);
+
+        // 4. DTO로 변환 후 반환
+        return challengeConverter.toChallengeResponseDTO(updatedChallenge);
+    }
 }
 
