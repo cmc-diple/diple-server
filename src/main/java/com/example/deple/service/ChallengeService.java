@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -34,6 +35,13 @@ public class ChallengeService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 Day에 해당하는 챌린지를 찾을 수 없습니다."));
 
         return challengeConverter.toChallengeResponseDTO(challenge);
+    }
+
+    @Transactional(readOnly = true)
+    public ChallengeResponseDTO.AllChallengeListDto getAllChallenges() {
+        List<Challenge> challenges = challengeRepository.findAll();
+
+        return ChallengeResponseDTO.AllChallengeListDto.builder().challengeList(challenges).build();
     }
 }
 

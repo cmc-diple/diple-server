@@ -31,4 +31,12 @@ public class ChallengeController {
         ChallengeResponseDTO challengeResponseDTO = challengeService.getChallenge(challengeDay);
         return ApiResponse.successResponse(challengeResponseDTO);
     }
+
+
+    @Operation(summary = "챌린지 전체 목록 보여주기 API")
+    @GetMapping({"/challenges/challengeAll"})
+    public ApiResponse<ChallengeResponseDTO.AllChallengeListDto> getRecipeList(){
+        return ApiResponse.successResponse(challengeService.getAllChallenges());
+    }
+
 }

@@ -29,14 +29,18 @@ public class Challenge extends BaseTimeEntity {
     @Column(nullable = true)
     private String details;
 
+    @Enumerated(EnumType.ORDINAL)
+    private Status status;
+
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL)
     private List<MemberChallenge> memberChallenge = new ArrayList<>();
 
     @Builder
-    public Challenge(Integer number, String title, String details, List<MemberChallenge> memberChallenge) {
+    public Challenge(Integer number, String title, String details, Status status, List<MemberChallenge> memberChallenge) {
         this.number = number;
         this.title = title;
         this.details = details;
+        this.status = status;
         this.memberChallenge = memberChallenge;
     }
 }
