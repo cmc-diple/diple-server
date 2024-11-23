@@ -5,10 +5,7 @@ import com.example.deple.dto.challenge.ChallengeRequestDTO;
 import com.example.deple.dto.challenge.ChallengeResponseDTO;
 import com.example.deple.service.ChallengeService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ChallengeController {
@@ -24,6 +21,14 @@ public class ChallengeController {
             @RequestBody ChallengeRequestDTO.ChallengeCreateDto request,
             @PathVariable("challengeDay") Integer challengeDay) {
         ChallengeResponseDTO challengeResponseDTO = challengeService.createChallenge(challengeDay,request);
+        return ApiResponse.successResponse(challengeResponseDTO);
+    }
+
+    @GetMapping({"/challenges/{challengeDay}"})
+    @Operation(summary="챌린지 조회 API")
+    public ApiResponse<ChallengeResponseDTO> challenge(
+            @PathVariable("challengeDay") Integer challengeDay) {
+        ChallengeResponseDTO challengeResponseDTO = challengeService.getChallenge(challengeDay);
         return ApiResponse.successResponse(challengeResponseDTO);
     }
 }
