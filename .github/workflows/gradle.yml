@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "infra" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "infra" ]
 
 permissions:
   contents: read
@@ -29,8 +29,8 @@ jobs:
       - name: web docker build and push
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t younggyolee/reddi .
-          docker push younggyolee/reddi
+          docker build -t soul4927/diple-server .
+          docker push soul4927/diple-server
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -45,6 +45,6 @@ jobs:
             ## docker-compose 실행
             sudo chmod 666 /var/run/docker.sock
             sudo docker rm -f $(docker ps -qa)
-            sudo docker pull younggyolee/reddi
-            docker-compose -f docker-compose.yml --env-file ./.env up -d
+            sudo docker pull soul4927/diple-server
+            docker-compose -f docker-compose.yml --env-file ./.env.prod up -d
             docker image prune -f
