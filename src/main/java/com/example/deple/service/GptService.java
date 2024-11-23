@@ -28,8 +28,8 @@ public class GptService {
     private String API_KEY;
 
     @Transactional
-    public String getGptResponse(String prompt) {
-        log.info("GPT API 호출 시작 - prompt: {}", prompt);
+    public String getGptResponse(String user_prompt, String system_prompt) {
+        log.info("GPT API 호출 시작 - user_prompt: {}", user_prompt);
 
         try {
             // HTTP 헤더 설정
@@ -44,11 +44,11 @@ public class GptService {
             List<Map<String, String>> messages = new ArrayList<>();
             messages.add(Map.of(
                     "role", GptConfig.SYSTEM_ROLE,
-                    "content", "You are a helpful assistant."
+                    "content", system_prompt
             ));
             messages.add(Map.of(
                     "role", GptConfig.USER_ROLE,
-                    "content", prompt
+                    "content", user_prompt
             ));
 
             requestBody.put("messages", messages);
