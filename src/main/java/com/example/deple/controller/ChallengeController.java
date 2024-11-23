@@ -35,7 +35,7 @@ public class ChallengeController {
 
     @Operation(summary = "챌린지 전체 목록 보여주기 API")
     @GetMapping({"/challenges/challengeAll"})
-    public ApiResponse<ChallengeResponseDTO.AllChallengeListDto> getRecipeList(){
+    public ApiResponse<ChallengeResponseDTO.AllChallengeListDto> getChallengeList(){
         return ApiResponse.successResponse(challengeService.getAllChallenges());
     }
 
@@ -56,4 +56,9 @@ public class ChallengeController {
         return ApiResponse.successResponse(challengeResponseDTO);
     }
 
+    @Operation(summary = "엔딩 크레딧 - 완료된 챌린지 보여주는 API")
+    @GetMapping("/challenges/complete/challengeAll")
+    public ApiResponse<ChallengeResponseDTO.ChallengeSummaryDTO> getCompletedList(){
+        return ApiResponse.successResponse(challengeService.getAllCompletedChallenges());
+    }
 }
