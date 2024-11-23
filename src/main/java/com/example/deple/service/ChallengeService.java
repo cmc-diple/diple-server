@@ -25,7 +25,24 @@ public class ChallengeService {
 
     @Transactional
     public ChallengeResponseDTO createChallenge(Integer challengeDay, ChallengeRequestDTO.ChallengeCreateDto challengeRequestDTO) {
-        Challenge challenge = challengeConverter.toChallengeEntity(challengeDay,challengeRequestDTO);
+        boolean challengeExists = challengeRepository.existsByNumber(challengeDay);
+        if (challengeExists) {
+            throw new IllegalArgumentException("해당 날짜에 이미 챌린지가 존재합니다.");
+        }
+
+        if (challengeRequestDTO.getTitle() == null || challengeRequestDTO.getTitle().isEmpty()) {
+            throw new IllegalArgumentException("챌린지 제목은 반드시 입력해야 합니다.");
+        }
+
+        if (challengeRequestDTO.getTitle().length() > 20) {
+            throw new IllegalArgumentException("제목은 20자 이내여야 합니다.");
+        }
+
+        if (challengeRequestDTO.getDescription().length() > 300) {
+            throw new IllegalArgumentException("내용은 300자 이내여야 합니다.");
+        }
+
+        Challenge challenge = challengeConverter.toChallengeEntity(challengeDay, challengeRequestDTO);
         Challenge savedChallenge = challengeRepository.save(challenge);
         return challengeConverter.toChallengeResponseDTO(savedChallenge);
     }

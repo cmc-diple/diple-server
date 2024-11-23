@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
     Optional<Challenge> findByNumber(Integer day);
     List<Challenge> findByStatus(Status status);
+    boolean existsByNumber(Integer day);
 }
