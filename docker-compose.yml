@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  web:
+    container_name: diple-server
+    image: soul4927/diple-server
+    ports:
+      - "8080:8080"
+    restart: always
+    volumes:
+      - .:/app
+volumes:
+  app:
+  dbdata:
